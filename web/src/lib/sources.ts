@@ -74,7 +74,7 @@ const slackMetadata = {
   displayName: "Slack",
   category: SourceCategory.Messaging,
   isPopular: true,
-  docs: "https://docs.onyx.app/connectors/slack",
+  docs: "https://docs.datasaga.ai/connectors/slack",
   oauthSupported: true,
   federated: true,
   federatedTooltip:
@@ -89,7 +89,7 @@ export const SOURCE_METADATA_MAP: SourceMap = {
     icon: ConfluenceIcon,
     displayName: "Confluence",
     category: SourceCategory.Wiki,
-    docs: "https://docs.onyx.app/connectors/confluence",
+    docs: "https://docs.datasaga.ai/connectors/confluence",
     oauthSupported: true,
     isPopular: true,
   },
@@ -97,7 +97,7 @@ export const SOURCE_METADATA_MAP: SourceMap = {
     icon: SharepointIcon,
     displayName: "Sharepoint",
     category: SourceCategory.Wiki,
-    docs: "https://docs.onyx.app/connectors/sharepoint",
+    docs: "https://docs.datasaga.ai/connectors/sharepoint",
     isPopular: true,
   },
   notion: {

@@ -2,7 +2,7 @@
 
 import { useContext } from "react";
 import { SettingsContext } from "../settings/SettingsProvider";
-import { OnyxIcon, OnyxLogoTypeIcon } from "../icons/icons";
+import { DataSagaIcon, DataSagaLogoTypeIcon } from "../icons/icons";
 
 export function Logo({
   height,
@@ -34,7 +34,7 @@ export function Logo({
   ) {
     return (
       <div style={{ height, width }} className={className}>
-        <OnyxIcon
+        <DataSagaIcon
           size={height}
           className={`${className} dark:text-[#fff] text-[#000]`}
         />
@@ -63,7 +63,7 @@ export function LogoType({
   size?: "small" | "default" | "large";
 }) {
   return (
-    <OnyxLogoTypeIcon
+    <DataSagaLogoTypeIcon
       size={115}
       className={`items-center w-full dark:text-[#fff]`}
     />

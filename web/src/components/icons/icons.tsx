@@ -3120,7 +3120,7 @@ export const PinnedIcon = ({
     </svg>
   );
 };
-export const OnyxLogoTypeIcon = ({
+export const DataSagaLogoTypeIcon = ({
   size = 16,
   className = defaultTailwindCSS,
 }: IconProps) => {
@@ -3176,7 +3176,7 @@ export const OnyxLogoTypeIcon = ({
   );
 };
 
-export const OnyxIcon = ({
+export const DataSagaIcon = ({
   size = 16,
   className = defaultTailwindCSS,
 }: IconProps) => {
