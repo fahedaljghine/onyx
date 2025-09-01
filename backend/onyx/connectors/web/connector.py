@@ -26,6 +26,7 @@ from onyx.configs.app_configs import WEB_CONNECTOR_OAUTH_CLIENT_ID
 from onyx.configs.app_configs import WEB_CONNECTOR_OAUTH_CLIENT_SECRET
 from onyx.configs.app_configs import WEB_CONNECTOR_OAUTH_TOKEN_URL
 from onyx.configs.app_configs import WEB_CONNECTOR_VALIDATE_URLS
+from onyx.configs.app_configs import WEB_CONNECTOR_VERIFY_SSL
 from onyx.configs.constants import DocumentSource
 from onyx.connectors.exceptions import ConnectorValidationError
 from onyx.connectors.exceptions import CredentialExpiredError
@@ -173,7 +174,7 @@ def check_internet_connection(url: str) -> None:
         session = requests.Session()
         session.headers.update(DEFAULT_HEADERS)
 
-        response = session.get(url, timeout=5, allow_redirects=True)
+        response = session.get(url, timeout=5, allow_redirects=True, verify=WEB_CONNECTOR_VERIFY_SSL)
 
         response.raise_for_status()
     except requests.exceptions.HTTPError as e:
@@ -331,7 +332,7 @@ def start_playwright() -> Tuple[Playwright, BrowserContext]:
 
 def extract_urls_from_sitemap(sitemap_url: str) -> list[str]:
     try:
-        response = requests.get(sitemap_url, headers=DEFAULT_HEADERS)
+        response = requests.get(sitemap_url, headers=DEFAULT_HEADERS, verify=WEB_CONNECTOR_VERIFY_SSL)
         response.raise_for_status()
 
         soup = BeautifulSoup(response.content, "html.parser")
@@ -500,13 +501,13 @@ class WebConnector(LoadConnector):
 
         # First do a HEAD request to check content type without downloading the entire content
         head_response = requests.head(
-            initial_url, headers=DEFAULT_HEADERS, allow_redirects=True
+            initial_url, headers=DEFAULT_HEADERS, allow_redirects=True, verify=WEB_CONNECTOR_VERIFY_SSL
         )
         is_pdf = is_pdf_content(head_response)
 
         if is_pdf or initial_url.lower().endswith(".pdf"):
             # PDF files are not checked for links
-            response = requests.get(initial_url, headers=DEFAULT_HEADERS)
+            response = requests.get(initial_url, headers=DEFAULT_HEADERS, verify=WEB_CONNECTOR_VERIFY_SSL)
             page_text, metadata, images = read_pdf_file(
                 file=io.BytesIO(response.content)
             )
