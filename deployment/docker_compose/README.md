@@ -42,3 +42,33 @@ For GPUs to be accessible to containers, you will need the container toolkit. Pl
 2. To shut down the deployment, run:
    - To stop the containers: `docker compose -f docker-compose.gpu-dev.yml -p onyx-stack stop`
    - To delete the containers: `docker compose -f docker-compose.gpu-dev.yml -p onyx-stack down`
+
+## Resource Limits
+
+Onyx services have configurable resource limits to prevent them from consuming excessive system resources. The indexing service (Vespa) is particularly memory-intensive and is now capped at 4GB by default.
+
+### Configuring Resource Limits
+
+You can customize resource limits by setting environment variables in your `.env` file:
+
+```bash
+# Indexing Service (Vespa) Limits
+VESPA_MEM_LIMIT=4g          # Memory limit (default: 4g)
+VESPA_CPU_LIMIT=2           # CPU limit (default: 2)
+VESPA_MEM_RESERVATION=2g    # Memory reservation (default: 2g)
+VESPA_CPU_RESERVATION=1     # CPU reservation (default: 1)
+
+# Other Services
+BACKGROUND_MEM_LIMIT=10g    # Background service memory limit
+API_SERVER_MEM_LIMIT=4g     # API server memory limit
+POSTGRES_MEM_LIMIT=4g       # Database memory limit
+```
+
+### Memory Limits Applied
+
+- **Indexing Service**: Capped at 4GB to prevent excessive RAM usage
+- **Background Service**: Limited to 10GB for processing jobs
+- **API Server**: Limited to 4GB for handling requests
+- **Database**: Limited to 4GB for data operations
+
+These limits ensure stable operation and prevent any single service from consuming all available system resources.

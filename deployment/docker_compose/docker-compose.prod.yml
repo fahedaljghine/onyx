@@ -217,6 +217,14 @@ services:
       options:
         max-size: "50m"
         max-file: "6"
+    deploy:
+      resources:
+        limits:
+          cpus: ${VESPA_CPU_LIMIT:-2}
+          memory: ${VESPA_MEM_LIMIT:-4g}
+        reservations:
+          cpus: ${VESPA_CPU_RESERVATION:-1}
+          memory: ${VESPA_MEM_RESERVATION:-2g}
 
   nginx:
     image: nginx:1.23.4-alpine
